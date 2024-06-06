@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "761961568576",
+    "project_id": "fooddeliveryapp-f4242",
+    "storage_bucket": "fooddeliveryapp-f4242.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761961568576:android:fa7a34de9c5efb0d7902a5",
+        "android_client_info": {
+          "package_name": "com.example.mobimall"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDi3ZCN0C36JHyxGKVSaQrsgbvOshmTZRk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
