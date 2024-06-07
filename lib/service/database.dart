@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mobimall/service/shared_pref.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shared_preferences_android/shared_preferences_android.dart';
 
 class DatabaseMethods {
 
@@ -18,6 +17,12 @@ class DatabaseMethods {
         .collection('users')
         .doc(id)
         .update({"Wallet": amount});
+  }
+
+  Future addFoodItem(Map<String, dynamic> userInfoMap, String name) async {
+    return await FirebaseFirestore.instance
+        .collection(name)
+        .add(userInfoMap);
   }
 
 

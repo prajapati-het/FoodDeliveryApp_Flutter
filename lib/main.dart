@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:mobimall/admin/add_food.dart';
+import 'package:mobimall/admin/admin_login.dart';
 import 'package:mobimall/pages/bottomnav.dart';
 import 'package:mobimall/pages/details.dart';
 import 'package:mobimall/pages/home.dart';
@@ -32,7 +34,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Onboard(),
+      home: AddFood(),
     );
   }
 }
