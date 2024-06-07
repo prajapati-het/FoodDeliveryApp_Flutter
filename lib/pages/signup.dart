@@ -38,13 +38,14 @@ class _SignUpState extends State<SignUp> {
               "Registered Successfully",
               style: TextStyle(fontSize: 20.0),
             ))));
-        String Id = randomAlphaNumeric(10);
+        String? Id = randomAlphaNumeric(10);
         Map<String, dynamic> addUserInfo = {
           "Name": namecontroller.text,
           "Email": mailcontroller.text,
           "Wallet": "0",
           "Id": Id,
         };
+
         await DatabaseMethods().addUserDetail(addUserInfo, Id);
         await SharedPreferenceHelper().saveUserName(namecontroller.text);
         await SharedPreferenceHelper().saveUserEmail(mailcontroller.text);

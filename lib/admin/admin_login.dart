@@ -10,6 +10,15 @@ class AdminLogin extends StatefulWidget {
 class _AdminLoginState extends State<AdminLogin> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      backgroundColor: Color(0xFFefdedeb),
+      body: Container(
+        child: Stack(
+          children: [
+
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -2,7 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mobimall/widget/widget_support.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../service/database.dart';
+import '../service/shared_pref.dart';
 import 'details.dart';
 
 class Home extends StatefulWidget {
@@ -18,6 +21,7 @@ class _HomeState extends State<Home> {
       pizza = false,
       salad = false,
       burger = false;
+
 
   @override
   Widget build(BuildContext context) {

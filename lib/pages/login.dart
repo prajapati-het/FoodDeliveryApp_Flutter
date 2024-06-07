@@ -7,6 +7,8 @@ import 'package:mobimall/pages/forgotpassword.dart';
 import 'package:mobimall/pages/signup.dart';
 import 'package:mobimall/widget/widget_support.dart';
 
+import '../service/shared_pref.dart';
+
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
 
@@ -27,6 +29,11 @@ class _LogInState extends State<LogIn> {
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
+
+      await SharedPreferenceHelper().saveUserEmail(useremailcontroller.text);
+
+      print(useremailcontroller.text);
+
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => BottomNav()));
     } on FirebaseAuthException catch (e) {
