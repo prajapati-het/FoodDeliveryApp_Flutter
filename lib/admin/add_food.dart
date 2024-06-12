@@ -4,6 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:random_string/random_string.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../service/database.dart';
 import '../widget/widget_support.dart';
@@ -23,6 +24,20 @@ class _AddFoodState extends State<AddFood> {
   TextEditingController detailcontroller = TextEditingController();
   final ImagePicker _picker = ImagePicker();
   File? selectedImage;
+
+  @override
+  void initState() {
+    super.initState();
+    requestPermissions();
+  }
+
+  Future<void> requestPermissions() async {
+    await [
+      Permission.camera,
+      Permission.storage,
+      Permission.manageExternalStorage,
+    ].request();
+  }
 
   Future getImage() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);

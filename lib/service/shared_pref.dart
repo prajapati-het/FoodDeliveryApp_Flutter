@@ -7,6 +7,7 @@ class SharedPreferenceHelper {
   static String userNameKey = "USERNAMEKEY";
   static String userEmailKey = "USEREMAILKEY";
   static String userWalletKey = "USERWALLETKEY";
+  static String userProfileKey = "USERPROFILEKEY";
 
   Future<bool> saveUserId(String getUserId) async {
     try {
@@ -52,6 +53,17 @@ class SharedPreferenceHelper {
     }
   }
 
+  Future<bool> saveUserProfile(String getUserProfile) async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return prefs.setString(userProfileKey, getUserProfile);
+    } catch (e) {
+      SharedPreferences.setMockInitialValues({});
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return prefs.setString(userProfileKey, getUserProfile);
+    }
+  }
+
   Future<String?> getUserId() async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -82,6 +94,17 @@ class SharedPreferenceHelper {
       SharedPreferences.setMockInitialValues({});
       SharedPreferences prefs = await SharedPreferences.getInstance();
       return prefs.getString(userEmailKey);
+    }
+  }
+
+  Future<String?> getUserProfile() async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return prefs.getString(userProfileKey);
+    } catch (e) {
+      SharedPreferences.setMockInitialValues({});
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return prefs.getString(userProfileKey);
     }
   }
 

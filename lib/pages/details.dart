@@ -3,15 +3,44 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mobimall/widget/widget_support.dart';
 
+import '../service/database.dart';
+import '../service/shared_pref.dart';
+
 class Details extends StatefulWidget {
-  const Details({super.key});
+  String image, name, detail, price;
+  Details(
+      {required this.detail,
+        required this.image,
+        required this.name,
+        required this.price});
+
+  //const Details({super.key});
 
   @override
   State<Details> createState() => _DetailsState();
 }
 
 class _DetailsState extends State<Details> {
-  int a = 1;
+  int a = 1, total=0;
+  String? id;
+
+  getthesharedpref() async {
+    id = await SharedPreferenceHelper().getUserId();
+    setState(() {});
+  }
+
+  ontheload() async {
+    await getthesharedpref();
+    setState(() {});
+  }
+
+
+  @override
+  void initState() {
+    super.initState();
+    ontheload();
+    total = int.parse(widget.price);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +66,8 @@ class _DetailsState extends State<Details> {
                 color: Colors.black,
               ),
             ),
-            Image.asset(
-              "images/salad2.png",
+            Image.network(
+              widget.image,
               width: screenWidth,
               height: screenHeight / 2.5,
               fit: BoxFit.fill,
@@ -52,13 +81,10 @@ class _DetailsState extends State<Details> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Mediterranean",
+                      widget.name,
                       style: AppWidget.SemiBoldTextFieldStyle(),
                     ),
-                    Text(
-                      "Chickpea Salad",
-                      style: AppWidget.boldTextFieldStyle(),
-                    ),
+
                   ],
                 ),
                 Spacer(),
@@ -66,6 +92,7 @@ class _DetailsState extends State<Details> {
                   onTap: () {
                     if (a > 1) {
                       --a;
+                      total = total - int.parse(widget.price);
                     }
                     setState(() {});
                   },
@@ -92,6 +119,7 @@ class _DetailsState extends State<Details> {
                 GestureDetector(
                   onTap: () {
                     ++a;
+                    total = total + int.parse(widget.price);
                     setState(() {});
                   },
                   child: Container(
@@ -110,7 +138,7 @@ class _DetailsState extends State<Details> {
               height: 20.0,
             ),
             Text(
-              "Pain itself is very important to the main ecological system. But I give it time to fall into the labor and pain. In order to get some advantage from it, he exercises some great work for himself. A pardon is taken except to get the right to accuse the pleasure of the accusers, the pain in the pleasures of the pain will open the pain.",
+              widget.detail,
               style: AppWidget.LightTextFieldStyle(),
               maxLines: 3,
             ),
@@ -153,14 +181,29 @@ class _DetailsState extends State<Details> {
                         style: AppWidget.SemiBoldTextFieldStyle(),
                       ),
                       Text(
-                        "\$28",
+                        "\$"+total.toString(),
                         style: AppWidget.boldTextFieldStyle(),
                       )
                     ],
                   ),
                   GestureDetector(
-                    onTap: () {
+                    onTap: ()async {
                       // Add your add-to-cart logic here
+                      Map<String, dynamic> addFoodtoCart = {
+                        "Name": widget.name,
+                        "Quantity": a.toString(),
+                        "Total": total.toString(),
+                        "Image": widget.image
+                      };
+
+                      await DatabaseMethods().addFoodToCart(addFoodtoCart, id!);
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          backgroundColor: Colors.orangeAccent,
+                          content: Text(
+                            "Food Added to Cart",
+                            style: TextStyle(fontSize: 18.0),
+                          )));
+
                     },
                     child: Container(
                       width: screenWidth * 0.5,  // Use half of the screen width

@@ -213,10 +213,6 @@ class _WalletState extends State<Wallet> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
-              Text("Name : $name Wallet--> $wallet")
             ],
           )),
     );
